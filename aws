@@ -1,0 +1,47 @@
+aws ec2 export-image \
+  --image-id ami-0ff24c03578d71c4c \
+  --disk-image-format VMDK \
+  --s3-export-location S3Bucket=used-car-gcp-migration,S3Prefix=gcp
+aws ec2 export-image --image-id ami-id --disk-image-format VMDK --s3-export-location S3Bucket=my-export-bucket,S3Prefix=exports/
+
+aws ec2 create-store-image-task \
+    --image-id  ami-0ff24c03578d71c4c \
+    --bucket used-car-gcp-migration
+    
+    
+    aws ec2 create-store-image-task \
+    --image-id ami-0ff24c03578d71c4c \
+    --bucket used-car-gcp-migration
+    
+    aws iam create-role --role-name vmimport --assume-role-policy-document "file://home/trust-policy.json"
+    
+   
+    
+ vmimport role on gaadi account	   
+  {
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Principal": {
+				"Service": "vmie.amazonaws.com"
+			},
+			"Action": "sts:AssumeRole",
+			"Condition": {
+				"StringEquals": {
+					"sts:Externalid": "vmimport"
+				}
+			}
+		}
+	]
+}
+
+aws ec2 describe-export-image-tasks –export-image-task-ids 
+
+aws ec2 create-store-image-task \
+    --image-id ami-1234567890abcdef0 \
+    --bucket myamibucket
+    
+     aws ec2 create-store-image-task --image-id ami-0ff24c03578d71c4c --bucket used-car-gcp-migration
+     
+     gsutil cp s3://gcp-migration-usercar/gcpexport-ami-060abe58260ed6aad.vmdk gs://usedcars_common 
