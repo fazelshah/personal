@@ -1,6 +1,6 @@
-CREATE ROLE ankitpatel WITH LOGIN PASSWORD 'Ank7^5$3@@@542';
-powerdrift database password: PoweDrift#@435
-292528552804 Incorect76@#
+
+
+
 tar -czvf staging_public.tar.gz /home/girnarsfa/staging_public_html/
 
 mysqldump -u your_username  --all-databases | gzip > all_databases_backup.sql.gz
@@ -22,7 +22,7 @@ screen -S dumprestore
 screen -ls
 shift ad
 
-1.0.25.229(test-jenkins)
+
  mysqldump -v -h 180.179.212.241 -uroot -p px7en4miVJ googleanalytics > googleanalytics.sql
 CREATE TABLE new_table AS SELECT * FROM original_table;
 
@@ -30,25 +30,9 @@ CREATE TABLE new_table AS SELECT * FROM original_table;
 ###########################################################################################
 #########################################################################################################
 
-host =164.52.200.68
-ssh root@164.52.200.68
-Password= P]k]69qghnnDQ4Um
 
-username:raturi
-password:elk@12345
-
-
-my-acc-log-es
 #####################################################################################################################################################################################################
 
-step 1: open jenkins job which is mentioned in the mail
-step 2: copy the path of deployment configuration folder (cd /usr/dev/gaadi/gaadi-connx-webapib2cnew-qa)
-step 3: login to 172.10.1.4 ssh -i gaadi-vpc.pem ec2-user@172.10.1.4
-step 4: sudo -i
-step5: su deployer
-step 6: enter in to the folder path coppied
-step 7: vi lib/capistrano/tasks/copy_config.rake
-step8: make changes as per request in the mail
 ######################################################################################################################################################################################################
 graffna steps:
 
@@ -99,16 +83,7 @@ steps to change the instance types from t2 to t3 in asg (ena disabled to ena ena
 
 
 #######################################################################################################################################################################################################
-@Fazel Fayaz Shah 
-if we have to set u backend 2 then
-follow below steps
-1.open jenkins job
-2. click configure
-3. in env section add new env (ex: qa1 qa2 ...)
-4.in deployment server in folder structure, open autoscale_deploy.sh
-5. add new env on sourcefile line
-6. add new staging2.rb file and staging2.rb.temp file in /config/deploy/ folder
-7. make changes in the above file env variabl
+
 
 
 ######################################################################################################################################################################################################
@@ -124,51 +99,32 @@ ncdu /
 
 ######################################################################################################################################################################################################
 
-$x("//span[text()='shivam_gupta']/../..//input[@name='[gaadi-connx-b2c-staging-backend]']")
+
 
 
 ####################################################################################################################################################################################################
 
 
 
-set :ENVRQA, ENV['ENVR'] || 'qa'
 
-
-execute "cd #{release_path}/ && php init --env=#{fetch(:ENVRQA)} --overwrite=All "
 
 
 #####################################################################################################################################################################################################
 
 
-case $1 in
-     "qa1" | "qa2" | "qa3" | "qa4" | "qa5" | "qa6" | "qa7" ) sourece_file=/usr/dev/Auction/girnarsoft-auctionnode_qa/config/deploy/${1}.rb.temp ;
-		    scaling_group=Auction-QA-ASG ;
-                    destination_file=/usr/dev/Auction/girnarsoft-auctionnode_qa/config/deploy/${1}.rb ;;
                     
                     
 ########################################################################################################################################################################################################
 
 
-/etc/init.d/jenkins restart
-172.22.2.44
 
 
 
 
-UI deployment production
--login to 8.51 server
--switch to pwa-deploy user
-- cd , cd deploy/pwa
-- pull of branch - 
--npm run gulp-default:prod && npm run build:prod --apiBaseUrl="https://webapib2c.gaadi.com/"
 
-- sh build.sh
-- cd sync_code
-- sh cdn.sh 
-- sh sync.sh
 #########################################################################################################################################################################################################
 
-http://1.0.29.130/
+
 
 #######################################################################################################################################################################################################
 
@@ -195,8 +151,7 @@ copy publich key of ssshfs system to remote server
 sshfs -o nonempty  cardekho@1.0.28.84:/var/www/html/ /var/www/html
 
 ######################################################################################################################################################################################################
-172.31.13.26
-Gaadi Connx Dev Stage Prod
+
 
 timedatectl set-timezone Asia/Kolkata
 ########################################################################################################################################################################################################
@@ -307,15 +262,11 @@ chmod 600 .ssh/authorized_keys
         }
     ]
 }
-carsales-qa.cardekho.com.edgesuite.net
 
 
-kuber netes
-knetes269@gmail.com
 
-jenkins :
-admin
-Girnar@48huTZcg6E8HDuCr
+
+
 
 ########################################################################################################################################################################################################
 > git clone https://github.com/edenhill/librdkafka.git
@@ -423,24 +374,18 @@ server {
 }
 
 ########################################################################################################################################################################################################
-192.168.33.18 hy56$%34212ZZZ
+
 
 #################################################################################################################################################################################################################
-pfsense password: 3qHhtH5wxfQBqvx12@
 
 
 
 
-newapi.pricedekho.com.edgesuite.net
+
 
 
 ###################################################################################################################################################################################################
 
-dualstack.pricedekho-elb-1133155214.ap-south-1.elb.amazonaws.com.
-application to classical load balancer
-ap -south-1
-
-pricedekho-elb-1133155214.ap-south-1.elb.amazonaws.com
 
 #######################################################################################################################################################################################################
 
@@ -483,11 +428,10 @@ db.createUser({
   
   
   ####################################################################################################################################################################################################
-  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 token for github
-  cat /etc/nginx/.htpasswd
+
   
   ###############################################################################################################################################################################################
-  Sfaprod#2#fr$# sfaprod mysql databse password
+ 
   #####################################################################################################################################################################################################
   sudo sh -c "echo -n 'noc:' >> /etc/nginx/.htpasswd"
 sudo sh -c "openssl passwd noc@3214Fdr >> /etc/nginx/.htpasswd"
