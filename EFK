@@ -31,3 +31,8 @@ spec:
       resources:
         requests:
           storage: 10Gi
+
+#################################################################################################################################################################################
+
+To set the comtext of namespace in kubernetes
+kubectl config set-context --current --namespace=elastic-stack
