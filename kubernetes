@@ -1,0 +1,27 @@
+for creating command on kubernetes pod, we can use either
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: ubuntu-sleeper-2 
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    command:
+      - "sleep"
+      - "5000"
+
+or
+
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: ubuntu-sleeper-2 
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    command: ["sleep", "5000"]
+
+
+suppose if we have entrypoint and cmd on dockerfile and command and args on pod defifition file, then command will override the entrypoint and args will override cmd
