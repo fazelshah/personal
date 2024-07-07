@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-apiserver
+  namespace: kube-system
+spec:
+  containers:
+  - command:
+    - kube-apiserver
+      
+    image: k8s.gcr.io/kube-apiserver-amd64:v1.11.3
+    name: kube-apiserver
+    volumeMounts:
+    - mountPath: /tmp/users
+      name: usr-details
+      readOnly: true
+  volumes:
+  - hostPath:
+      path: /tmp/users
+      type: DirectoryOrCreate
+    name: usr-details
+
+
+###################################################################
+public key ends with .crt or .pem and privtae key ends with .key or -key.pem
+
+Asymmetric encryption has private and pulic key which symneynric has only one key
+foe server for ssh, we use ssh-keygen
+  
+For webserver we use
+openssl genrsa -out my-bank.key 1024
+openssl rsa -in my-bank.key -pubout > mybank.pem
+  self-signed certificate to make certificate valid
+  legitimte certificate CA certifucate authority like digicet, symantec
+  CSR certicate signing request
+  openssl req -new -key my-bank.key -out my-bank.csr -subj "/C=US/ST=CA/0=MYOrg,Inc./CN=mydomain.com"
+  
