@@ -10,3 +10,7 @@ kube-controller-manager
 kube-proxy
 
 kubeapi is only srver that talks to etcd so kubepai is client here
+
+
+to cat the certificate to see detials
+openssl x509 -in /etc/kuberenetes/mainfests/pki/apiserver.crt -yexy -noout
