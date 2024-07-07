@@ -21,6 +21,31 @@ spec:
     name: usr-details
 
 
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: db
+  name: db
+spec:
+  containers:
+  - image: mysql
+    name: db
+    envFrom:
+      - configMapRef:
+          name: my-config
+    volumeMounts:
+      - mountPath: /var/lib/mysql
+        name: site-data
+  volumes:
+  - name: site-data
+    hostPath:
+      # Ensure the file directory is created.
+      path: /var/local/aaa
+      type: DirectoryOrCreate
+
+
 ###################################################################
 public key ends with .crt or .pem and privtae key ends with .key or -key.pem
 
