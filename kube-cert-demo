@@ -1,0 +1,12 @@
+server componsntes
+kube-api-server  apisrver.crt and apisrevr.key
+etcd server
+kubelet server on worker node
+
+client components
+admin(us)
+kube-schedulwr
+kube-controller-manager
+kube-proxy
+
+kubeapi is only srver that talks to etcd so kubepai is client here
