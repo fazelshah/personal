@@ -1,0 +1,71 @@
+kubectl exec -it deploy-a-5c56568dff-fklfj -- nc -zv db-service 3306
+
+kubectl get svc  --selector app=deploy-a
+kubectl -n genin get pods --show-labels
+
+........
+NAME    READY   STATUS    RESTARTS   AGE     LABELS
+ramen   1/1     Running   0          9m10s   rank=genin
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: middleware-to-mysql
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: mysql
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: middleware
+
+Egress policies are the policies that are used to control the traffic that leaves the pod. It helps to limit or allow the outbound traffic from the pods.
+
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: jonin-to-genin
+  namespace: jonin
+spec:
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          rank: genin
+      namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: genin
+
+
+
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: hokage-allow
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      rank: hokage
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          rank: genin
+      namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: genin
+    - podSelector:
+        matchLabels:
+          rank: jonin
+      namespaceSelector:
+        matchLabels:
+           kubernetes.io/metadata.name: jonin
