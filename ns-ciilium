@@ -1,0 +1,29 @@
+Since the website will need to get data from the database, create a network policy with the following details:
+
+Policy Name: allow-website-ingress-to-database
+Policy action: Allow database pod to get ingress communication from website pod on port 3306
+
+
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-website-ingress-to-database
+  namespace: database
+spec:
+  podSelector:
+    matchLabels:
+      role: database
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          role: website
+    - podSelector:
+        matchLabels:
+          role: website
+    ports:
+    - protocol: TCP
+      port: 3306
+  policyTypes:
+  - Ingress
