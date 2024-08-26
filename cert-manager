@@ -1,0 +1,55 @@
+install cert-manager
+  helm install cert-manager jetstack/cert-manager --namespace cert-manager --set installCRDs=true
+
+
+  letencrypt cert 
+
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-staging
+  namespace: website
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: kodekloud-user@gmail.com
+    privateKeySecretRef:
+          name: letsencrypt-staging
+    solvers:
+    - http01:
+            ingress:
+              name: website-ingress
+
+                add to ingress.yaml file
+  
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: website-ingress
+  namespace: website
+  annotations:
+    cert-manager.io/issuer: letsencrypt-staging
+spec:
+  tls:
+  - hosts:
+    - companyx-website.com
+    secretName: web-ssl
+  defaultBackend:
+    service:
+      name: website-service-nodeport
+      port:
+        name: http
+  rules:
+  - host: companyx-website.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: website-service-nodeport
+            port:
+              name: http
+
+
+                kubectl describe certificate -n website
