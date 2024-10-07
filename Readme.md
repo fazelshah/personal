@@ -1,4 +1,20 @@
+github actions initial seteps
 
+ssh -i id_ed25519 -T git@github.com
+export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519"
+
+   git clone git@github.com:fazelshah/hprofile.git
+   
+     cd hprofile/
+  
+     unset GIT_SSH_COMMAND
+    git config core.sshCommand "ssh -i ~/.ssh/id_ed25519 -F /dev/null"
+    cat .git/config
+    git config user.name fazelshah
+    git config user.email fazelshah1@gmail.com
+
+    cat .git/config
+    
 
 
 tar -czvf staging_public.tar.gz /home/girnarsfa/staging_public_html/
