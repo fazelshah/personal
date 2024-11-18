@@ -31,3 +31,25 @@ spec:
     claimName: myclaim
 
 The same is true for ReplicaSets or Deployments. Add this to the pod template section of a Deployment on ReplicaSet.
+
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: webapp
+  name: webapp
+spec:
+  containers:
+  - image: kodekloud/event-simulator
+    name: webapp
+    volumeMounts:
+        - name: config-vol
+          mountPath: /log
+  volumes:
+    - name: config-vol
+      hostPath:
+       path: /var/log/webapp
+
