@@ -1,0 +1,22 @@
+ kubectl get nodes
+    2  nano cluster.yaml
+cat cluster.yaml 
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker
+- role: worker
+- role: worker
+
+    3  kind create cluster --name cluster2 --config cluster.yaml 
+    4  kubectl get nodes
+    5  kubectl config use-context cka-cluster1
+    6  kubectl config get-context
+    7  kubectl config get-contexts
+    8  kubectl config use-context cks-cluster1
+    9  kubectl config use-context kind-cks-cluster1
+   10  kubectl get nodes
+   11  kubectl config use-context kind-cluster2
+   12  kubectl get nodes
+   13  history
