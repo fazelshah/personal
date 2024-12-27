@@ -1,0 +1,21 @@
+---
+ - name: using loops
+   hosts: all
+   become: true
+   tasks: 
+     - name: install packages
+       yum:  
+          name: "{{item}}"
+          state: present
+       loop:
+         - nginx
+         - java
+         - mysql
+     - name: start service
+       service:
+         name: "{{item}}"
+         state: started
+       loop:
+         - nginx
+         - mysql
+         
