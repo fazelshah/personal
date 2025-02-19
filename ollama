@@ -1,0 +1,15 @@
+docker network create my-network
+
+
+
+docker run -d --name ollama --network my-network -p 11434:11434 ollama/ollama
+
+
+
+
+
+docker run -d --name open-webui --network my-network -p 3000:8080 \
+  -e OLLAMA_API_URL="http://ollama:11434" \
+  -e OLLAMA_BASE_URL="http://ollama:11434" \
+  -e USE_OLLAMA_DOCKER=true \
+  ghcr.io/open-webui/open-webui:main
