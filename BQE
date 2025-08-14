@@ -80,6 +80,139 @@ istioctl profile dump demo -0 yaml > demo.yaml
 
 
 
+dig kodekloud.com A    ipv4
+dig kodekloud.com AAAA  ipv6
+dig . NS\
+
+
+ps aux | nl (shows total number of lines)
+or ps aux | wc -l
+
+ps aux or ps ef
+
+
+security-group rule
+
+eg on one server name sg1 I have to do telnet to another server sg2, so I have to add sg1 ip into the security group of sg2
+
+now eg I have to telnet on port 80 on sg2 from sg1, so I have to add sg1 ip into security hroup of sg2
+, if the port is open is working on open on sg2 server then only it will get connect, else it will show connection refused
+
+
+
+      sudo apt update
+      sudo apt install software-properties-common
+      sudo add-apt-repository --yes --update ppa:ansible/ansible
+      sudo apt install ansible
+      ansible --version
+     
+      sudo apt install python3-venv -y
+      python3 -m venv myenvll
+      source myenv/bin/activate
+      pip install pywinrm
+      history
+
+ Ansible:
+      ansible_host: localhost
+      ansible_ssh_private_key_file: /root/ansible/tooling-aws-key.pem
+      ansible_user: ubuntu
+
+    Jenkins_Master:
+      ansible_host: 10.150.10.176
+      ansible_ssh_private_key_file: /root/ansible/tooling-aws-key.pem
+      ansible_user: ec2-user
+
+run winrm on windows server
+# Enable WinRM service
+winrm quickconfig -force
+
+# Allow Basic Authentication
+winrm set winrm/config/service/Auth '@{Basic="true"}'
+
+# Allow Unencrypted Connections (if using HTTP)
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+
+# Enable HTTPS (optional but recommended for secure communication)
+winrm create winrm/config/Listener?Address=*+Transport=HTTPS
+
+# For HTTP
+New-NetFirewallRule -Name "WinRM HTTP" -DisplayName "WinRM HTTP" -Protocol TCP -LocalPort 5985 -Action Allow
+
+# For HTTPS
+New-NetFirewallRule -Name "WinRM HTTPS" -DisplayName "WinRM HTTPS" -Protocol TCP -LocalPort 5986 -Action Allow
+
+
+5985
+
+
+all:
+  hosts:
+    centos:
+      ansible_host: 172.31.78.215
+      ansible_user: ec2-user
+      ansible_ssh_private_key_file: /root/ansible/key.pem
+    ubuntu:
+      ansible_host: 172.31.69.49
+      ansible_ssh_private_key_file: /root/ansible/key.pemw
+      ansible_user: ubuntu
+    windows:
+         ansible_host: 172.31.45.254
+         ansible_user: Administrator
+         ansible_password: %Fzd&IK4wp;dwMn2nzRw&;;*n*&OAeb)
+         ansible_connection: winrm
+         ansible_winrm_transport: basic
+         ansible_port: 5985
+
+
+---
+- name: Install .exe on Windows
+  hosts: windows
+  tasks:
+    - name: Copy the installer to the Windows machine
+      win_copy:
+        src: /root/ansible/LocalOffice_Agent.exe
+        dest: "C:\\LocalOffice_Agent.exe*"
+
+    - name: Install the .exe file
+      win_package:
+        path: "C:\\LocalOffice_Agent.exe*"
+        arguments: "/quiet /norestart"
+        state: present
+      register: install_result
+
+    - name: Check installation status
+      debug:
+        msg: "Installation result: {{ install_result }}"
+
+
+
+---
+- name: Install .exe on Windows
+  hosts: Test
+  tasks:
+    - name: Copy the installer to the Windows machine
+      win_copy:
+        src: /root/ansible/LocalOffice_Agent.exe
+        dest: "C:\\LocalOffice_Agent.exe"
+
+    - name: Install the .exe file
+      win_package:
+        path: "C:\\LocalOffice_Agent.exe"
+        arguments: "/silent/norestart"
+        state: present
+      register: install_result
+
+    - name: Check installation status
+      debug:
+        msg: "Installation result: {{ install_result }}"
+
+    - name: Start the ManageEngine UEMS - Agent service
+      win_service:
+        name: "ManageEngine UEMS - Agent"
+        state: started
+      when: install_result.changed
+
+
 
 
 
