@@ -1,0 +1,87 @@
+SELECT average(newrelic.goldenmetrics.apm.application.responseTimeMs) AS 'Average Response Time (in ms)' FROM Metric WHERE appName LIKE 'BQECoreAPI_AWS_IAD' since 2 minutes ago
+SELECT rate(count(apm.service.transaction.duration), 1 minute) as 'Total requests on Core API Per Minute (IAD_AWS)' FROM Metric where appName like 'BQECoreAPI_AWS_IAD' since 1 minutes ago
+
+SELECT 
+    max(duration), 
+    count(*), 
+    average(duration), 
+    percentage(count(*), WHERE duration > 5) AS Over5s, 
+    percentage(count(*), WHERE duration > 10) AS Over10s, 
+    percentage(count(*), WHERE duration > 60) AS Over60s, 
+    percentage(count(*), WHERE duration > 300) AS Over300s 
+FROM Transaction 
+WHERE DBInstance LIKE '%' and appName = 'BQECoreAPI_AWS_IAD'
+SINCE 1 hour ago FACET DBInstance LIMIT 15
+
+
+SELECT count(*), max(duration) 
+FROM Transaction 
+WHERE host = 'i-0b6e6d4e43eb5'
+SINCE 15 minutes ago 
+FACET request.uri, errorMessage,DatabaseId,host.displayName
+ORDER BY average(duration) 
+LIMIT 5
+
+SELECT average(duration), count(*) 
+FROM Transaction 
+WHERE error = true 
+SINCE 12 hours ago 
+FACET appName,DatabaseId,request.uri,errorMessage
+LIMIT MAX 
+
+
+SELECT count(*) FROM JavaScriptError WHERE  errorMessage LIKE '%' SINCE 2 hours ago FACET appName,errorMessage,requestUri LIMIT max
+
+
+select count(*) from Transaction where errorMessage LIKE '%' and error = true and appName like '%AWS_IAD' since 2 hours  ago FACET appName,errorMessage,DatabaseId,UserId,request.uri LIMIT max
+
+
+SELECT count(*) FROM TransactionError where appName LIKE '%AWS_IAD' SINCE 2 hours ago FACET error.message,request.uri,DatabaseId
+
+
+
+
+Istio
+
+
+
+curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.26.1 TARGET_ARCH=x86_64 sh -
+cd istio-1.26.1
+
+ export PATH=$PWD/bin:$PATH
+istioctl install --set profile=demo -y
+
+istioctl analyze -n default
+kubectl label namespace default istio-injection=enabled
+
+ istioctl kube-inject -f redis.yaml | kubectl apply -f -
+
+
+now with helm
+helm repo add url 
+helm repo update
+helm repo list
+
+When installing Istio using Helm, you need to install 3 charts:
+
+istio-base
+istiod
+istio-ingress
+
+
+helm install istio-base istio/base -n istio-system --version 1.18.2 --create-namespace --set profile=demo
+helm ls -n istio-system
+
+
+helm install istiod istio/istiod --namespace istio-system --version 1.18.2 --set profile=demo --set pilot.resources.requests.memory=128Mi --set pilot.resources.requests.cpu=250m
+
+customize installation
+istioctl profile dump demo -0 yaml > demo.yaml
+
+
+
+
+
+
+
+
